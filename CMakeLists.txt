@@ -8,6 +8,7 @@ set(VERSION_MINOR "0")
 
 option(UNIT_TESTS "Enable or disable unit tests execution" TRUE)
 option(DISABLE_INSTALL "Disable the installation for this component" TRUE)
+option(HADOKEN_MPI  "Enable or disable MPI test execution" FALSE)
 
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMake
       ${PROJECT_SOURCE_DIR}/CMake/portability
@@ -23,6 +24,7 @@ include(ReleaseDebugAutoFlags)
 
 file(GLOB HADOKEN_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/include/hadoken/*)
 file(GLOB HADOKEN_HEADERS_1 ${CMAKE_CURRENT_SOURCE_DIR}/include/hadoken/*/*)
+file(GLOB HADOKEN_HEADERS_2 ${CMAKE_CURRENT_SOURCE_DIR}/include/hadoken/*/*/*)
 
 
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/include/ ${BOOST_INCLUDE_DIR} )

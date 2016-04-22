@@ -41,14 +41,14 @@ public:
         return std::distance(first_, end_);
     }
 
-    inline std::vector<range<Container> > split(std::size_t number_parts, std::size_t min_size=1){
+    inline std::vector<range<Container> > split(size_t number_parts, size_t min_size=1){
         assert(number_parts > 0);
         assert(min_size >= 1);
 
         std::vector<range<Container> > ranges;
-        const std::size_t size_range = size();
-        const std::size_t avg_size= size_range/number_parts;
-        std::size_t remain_elems = size_range%number_parts;
+        const size_t size_range = size();
+        const size_t avg_size= size_range/number_parts;
+        size_t remain_elems = size_range%number_parts;
         ranges.reserve(number_parts);
 
         iterator first = begin(), last = begin();
