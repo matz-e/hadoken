@@ -109,7 +109,7 @@ inline MPI_Datatype _mpi_datatype_mapper(long double value){
 template<typename T>
 inline T _mpi_reduce_mapper(const T & pvalue, MPI_Datatype data_type, MPI_Op operation, const MPI_Comm comm){
     T res;
-    const T errcode = MPI_Allreduce(static_cast<const void *>(&pvalue),
+    const T errcode = MPI_Allreduce(static_cast<void *>(const_cast<T*>(&pvalue)),
                                     static_cast<void*>(&res),
                                     1, data_type, operation, comm);
     assert(errcode == MPI_SUCCESS);
@@ -185,7 +185,7 @@ template <typename T>
 inline std::vector<T> mpi_comm::all_gather(const T & local_value){
     std::vector<T> res(size());
 
-    if( MPI_Allgather(&local_value, 1, impl::_mpi_datatype_mapper(local_value),
+    if( MPI_Allgather(static_cast<void*>(const_cast<T*>(&local_value)), 1, impl::_mpi_datatype_mapper(local_value),
                   &(res[0]), 1, impl::_mpi_datatype_mapper(local_value), _comm) != MPI_SUCCESS){
         throw mpi_exception(ECOMM, "Error during MPI_Allgather() ");
     }
@@ -197,7 +197,7 @@ inline std::vector<T> mpi_comm::all_gather(const T & local_value){
 template <typename T>
 inline void mpi_comm::send(const T & local_value, int dest_node, int tag){
 
-    if( MPI_Send(&local_value, 1, impl::_mpi_datatype_mapper(local_value),
+    if( MPI_Send(static_cast<void*>(const_cast<T*>(&local_value)), 1, impl::_mpi_datatype_mapper(local_value),
                   dest_node, tag, _comm) != MPI_SUCCESS){
         throw mpi_exception(ECOMM, "Error during MPI_send() ");
     }

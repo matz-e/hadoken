@@ -31,7 +31,7 @@ LIST(APPEND MpiRuntime_src "mpi_test.cpp")
 include_directories(${MPI_C_INCLUDE_PATH})
 
 add_executable(mpi_test ${MpiRuntime_src})
-target_link_libraries(mpi_test ${Boost_UNIT_TEST_FRAMEWORK_LIBRARIES} ${MPI_LIBRARIES})
+target_link_libraries(mpi_test ${Boost_UNIT_TEST_FRAMEWORK_LIBRARIES} ${Boost_SYSTEM_LIBRARIES} ${MPI_LIBRARIES})
 
 add_test(NAME MpiTest_unit COMMAND ${TESTS_PREFIX} ${TESTS_PREFIX_ARGS} ${CMAKE_CURRENT_BINARY_DIR}/mpi_test)
 
