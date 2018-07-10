@@ -300,6 +300,11 @@ private:
         }
     }
 
+
+
+protected:
+
+
     cbrng_type b;
     ctr_type c;
     elem_type elem;
